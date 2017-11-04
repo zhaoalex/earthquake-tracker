@@ -1,2 +1,2 @@
 # earthquake-tracker
-Earthquake tracker using USGS dat
+Earthquake tracker using USGS data
