@@ -1,0 +1,21 @@
+.content {
+  display: flex;
+  justify-content: center;
+}
+
+.content > div {
+  margin: auto 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.refresh-button {
+  text-align: center;
+}
+
+#map {
+  height: 400px;
+  width: 800px;
+}
