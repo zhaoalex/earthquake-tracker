@@ -1,13 +1,17 @@
 $(document).foundation();
 
-var mymap = L.map('map').setView([0, 0], 1);
+var mymap;
 
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-  maxZoom: 18,
-  id: 'mapbox.streets',
-  accessToken: 'pk.eyJ1IjoiYWxleHpoYW8iLCJhIjoiY2o5bHRyZThmMXl1cTJ3cGdyZzA4Ymk2MSJ9.5D6chKJs9KgHH5GLXqfN5g'
-}).addTo(mymap);
+let initMap = () => {
+  mymap = L.map('map').setView([0, 0], 1);
+
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1IjoiYWxleHpoYW8iLCJhIjoiY2o5bHRyZThmMXl1cTJ3cGdyZzA4Ymk2MSJ9.5D6chKJs9KgHH5GLXqfN5g'
+  }).addTo(mymap);
+}
 
 let updateQuakes = () => {
   let jsonData = fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_day.geojson')
@@ -34,18 +38,12 @@ let refresh = () => {
 
   mymap.remove()
 
-  mymap = L.map('map').setView([0, 0], 1);
-
-  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 18,
-    id: 'mapbox.streets',
-    accessToken: 'pk.eyJ1IjoiYWxleHpoYW8iLCJhIjoiY2o5bHRyZThmMXl1cTJ3cGdyZzA4Ymk2MSJ9.5D6chKJs9KgHH5GLXqfN5g'
-  }).addTo(mymap);
+  initMap()
   updateQuakes()
   console.log("Refreshed page")
 }
 
+initMap()
 updateQuakes()
 
 /*Promise.all([jsonData])
